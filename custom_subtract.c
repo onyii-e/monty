@@ -1,4 +1,4 @@
-#include "custom_monty.h"
+#include "monty.h"
 
 /**
  * custom_subtract - preform subtraction operation

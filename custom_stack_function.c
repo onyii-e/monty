@@ -1,4 +1,4 @@
-#include "custom_monty.h"
+#include "monty.h"
 
 /**
  * custom_stack_fucntion - adjust the stack status
@@ -15,5 +15,5 @@ void custom_stack_function(
 {
 	(void)stack_head;
 	(void)line_number;
-	custom_bus.stack_status = 0
+	custom_bus.stack_status = 0;
 }

@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "stack.h"
 /**
  * division - Divides the top two elements of the stack
  * @stack_head: pointer to the head of the stack
