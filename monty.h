@@ -1,6 +1,5 @@
-#ifndef CUSTOM_MONTY_H
-#define CUSTOM_MONTY_H
-
+#ifndef MONTY_H
+#define MONTY_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -10,85 +9,77 @@
 #include <ctype.h>
 
 /**
- * struct custom_stack_s - Structure representing a stack item
- * @number: Integer value stored in the stack item
- * @prev_item: pointer to the previous stack item
- * @next_item: pointer to the next stack item
+ * struct stack_s - doubly linked list representation
+ * of stack
+ * @:prev: points to the previous element of stack
+ * @n: integer
+ * @next: points to the next element of the stack
  *
- * Description: pointer to the next stack item
+ * Description: doubly linked list node structure
+ * for stack, LIFO, queue,FIFO Holberton project
  */
 
-typedef struct custom_stack_s
+typedef struct stack_s
 {
-	int number;
-	struct custom_stack_s *prev_item;
-	struct custom_stack_s *next_item;
-} custom_stack_t;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
+} stack_t
 
 /**
- * struct custom_bus_s - Structure representing Monty program data
- * @argument: argument value
- * @monty_file: pointer to monty file
- * @line_content: content of the line
- * @status_flag: Flag indicating status of the program
- *
- * Description: Holds various data for monty program execution
+ * struct bus_s - variable -args, file, line content
+ * @arg: value
+ * @file: pointer to the monty file
+ * @content: line content
+ * @lifi: flag change stack <-> queue
+ * Description: carries values through the program
  */
 
-typedef struct custom_bus_s
+typedef struct bus_s
 {
-	char *argument;
-	FILE *monty_file;
-	char *line_content;
-	int status_flag;
-} custom_bus_t;
+	char *arg;
+	FILE *file;
+	char *content;
+	int lifi;
+} bus_t;
 
 /**
- * struct custom_instruction_s - Structure representing a monty instruction
- * @operation: operation/opcode of instruction
- * @function: Function to execute the instruction
+ * struct instruction_s - opcode and its function
+ * @opcode: the opcode
+ * @f: function to handle the opcode
  *
- * Description: Represents an instruction in the monty language
+ * Desciption: opcode and it fucntion
+ * for stack, LIFO, queue, FIFO Holberton project
  */
 
-typedef struct custom_instruction_s
+typedef struct instruction_s
 {
-	char *operation;
-	void (*function)(custom_stack_t **stack, unsigned int line_num);
-} custom_instruction_t;
-
-extern custom_bus_t custom_bus;
-char *custom_realloc(char *ptr, unsigned int old_size, unsigned int  new_size);
-ssize_t custom_get_input(char **lineptr, int file);
-char *custom_clean_line(char *content);
-void custom_push(custom_stack_t **head, unsigned int value);
-void custom_print_all(custom_stack_t **head, unsigned int value);
-void custom_print_int(custom_stack_t **head, unsigned int value);
-int custom_execute(
-		char *content,
-		custom_stack_t **head,
-		unsigned int counter,
-		FILE *file
-		);
-void custom_free_stack(custom_stack_t *head);
-void custom_pop(custom_stack_t **head, unsigned int counter);
-void custom_swap(custom_stack_t **head, unsigned int counter);
-void custom_add(custom_stack_t **head, unsigned int counter);
-void custom_no_op(custom_stack_t **head, unsigned int counter);
-void custom_substract(custom_stack_t **head, unsigned int counter);
-void custom_divide(custom_stack_t **head, unsigned int  counter);
-void custom_multiply(custom_stack_t **head, unsigned int counter);
-void custom_modulus(custom_stack_t **head, unsigned int counter);
-void custom_print_char(custom_stack_t **head, unsigned int counter);
-void custom_print_string(custom_stack_t **head, unsigned int counter);
-void custom_rotate_left(custom_stack_t **head, unsigned int counter);
-void custom_rotate_right(
-		custom_stack_t **head,
-		__attribute__((unused)) unsigned int counter
-		);
-void custom_add_noce(custom_stack_t **head, int value);
-void custom_add_queue(custom_stack_t **head, int value);
-void custom_stack(custom_stack_t **head, unsigned int counter);
-void custom_queue(custom_stack_t **head, unsigned int counter);
-
-#endif /* CUSTOM_MONTY_H */
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
+} instruction_t;
+extern bus_t bus;
+char *_realloc(char *ptr, unsigned int old_size, unsigned int new_size);
+ssize_t getstdin(char **lineptr, int file);
+char *clean_line(char *content);
+void f_push(stack_t **head, unsigned int number);
+void f_ pall(stack_t **head, unsigned int number);
+void f_pint(stack_t **head, unsigned int number);
+int execute(char *content, stack_t **head, unsigned int counter, FILE *file);
+void free_stack(stack_t *head);
+void f_pop(stack_t **head, unsigned int counter);
+void f_swap(stack_t **head, unsigned int counter);
+void f_add(stack_t **head, unsigned int counter);
+void f_nop(stack_t **head, unsigned int counter);
+void f_sub(stack_t **head, unsigned int counter);
+void f_mul(stack_t **head, unsigned int counter);
+void f_mod(stack_t **head, unsigned int counter);
+void f_div(stack_t **head, unsigned int counter);
+void f_pchar(stack_t **head, unsigned int counter);
+void f_pstr(stack_t **head, unsigned int counter);
+void f_rotl(stack_t **head, unsigned int counter);
+void f_rotr(stack_t **head, __attribute__((unused)) unsigned int counter);
+void f_addnode(stack_t **head, int n);
+void addqueue(stack_t **head, int n);
+void f_queue(stack_t **head, unsigned int counter);
+void f_stack(stack_t **head, unsigned int counter);
+#endif

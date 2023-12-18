@@ -8,14 +8,14 @@
  */
 int main(int argc, char *argv[])
 {
-	bus_t bus = {NULL, NULL, NULL, 0}
+	bus_t bus = {NULL, NULL, NULL, 0};
 
 	/* moved bus variable inside main */
 
 	char *content;
 	FILE *file;
 	size_t size = 0;
-	ssize_t read_line = 1;
+	size_t read_line = 1;
 	stack_t *stack = NULL;
 	unsigned int counter = 0;
 
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	while (read_line > 0)
 	{
 		content = NULL;
-		read_line = getline(&content, size, file);
+		read_line = getline(&content, &size, file);
 		bus.content = content;
 		counter++;
 
